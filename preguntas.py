@@ -21,8 +21,22 @@ def pregunta_01():
     214
 
     """
-    return
 
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    return sum([int(f[1]) for f in data])
 
 def pregunta_02():
     """
@@ -39,7 +53,28 @@ def pregunta_02():
     ]
 
     """
-    return
+
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    letters = [f[0] for f in data]
+    distinct_letters = list(set(letters))
+    distinct_letters.sort()
+
+    occurrences = [(l, letters.count(l)) for l in distinct_letters]
+
+    return occurrences
 
 
 def pregunta_03():
@@ -57,7 +92,32 @@ def pregunta_03():
     ]
 
     """
-    return
+
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    letters = [f[0] for f in data]
+    distinct_letters = list(set(letters))
+    distinct_letters.sort()
+
+    letters_sum = dict.fromkeys(distinct_letters, 0)
+
+    for r in data:
+
+        letters_sum[r[0]] += int(r[1])
+
+    return [(k, v) for k, v in letters_sum.items()]
 
 
 def pregunta_04():
@@ -82,8 +142,29 @@ def pregunta_04():
     ]
 
     """
-    return
 
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    months = [f[2][5:7] for f in data]
+    distinct_months = list(set(months))
+    distinct_months.sort()
+
+    occurrences = [(l, months.count(l)) for l in distinct_months]
+
+    return occurrences
+    
 
 def pregunta_05():
     """
@@ -100,7 +181,32 @@ def pregunta_05():
     ]
 
     """
-    return
+    
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    letters = [f[0] for f in data]
+    distinct_letters = list(set(letters))
+    distinct_letters.sort()
+
+    letters_nums = dict.fromkeys(distinct_letters, [])
+
+    for l in letters_nums:
+        
+        letters_nums[l] = [int(r[1]) for r in data if r[0]==l]
+
+    return [(k, max(v), min(v)) for k, v in letters_nums.items()]
 
 
 def pregunta_06():
@@ -125,7 +231,44 @@ def pregunta_06():
     ]
 
     """
-    return
+
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    dict_values = [f[4].split(',') for f in data]
+
+    codes = []
+
+    nums = []
+    
+    for f in dict_values:
+
+        for i in f:
+
+            codes.append(i[:3])
+
+            nums.append((i[:3], i[4:]))
+
+    codes.sort()
+
+    codes_nums = dict.fromkeys(codes, [])
+
+    for l in codes_nums:
+        
+        codes_nums[l] = [int(r[1]) for r in nums if r[0]==l]
+
+    return [(k, min(v), max(v)) for k, v in codes_nums.items()]
 
 
 def pregunta_07():
@@ -149,7 +292,32 @@ def pregunta_07():
     ]
 
     """
-    return
+
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    nums = [int(f[1]) for f in data]
+    distinct_nums = list(set(nums))
+    distinct_nums.sort()
+
+    nums_sum = dict.fromkeys(distinct_nums)
+
+    for n in nums_sum:
+        
+        nums_sum[n] = [r[0] for r in data if int(r[1])==n]
+
+    return [(k, v) for k, v in nums_sum.items()]
 
 
 def pregunta_08():
@@ -174,7 +342,32 @@ def pregunta_08():
     ]
 
     """
-    return
+
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    nums = [int(f[1]) for f in data]
+    distinct_nums = list(set(nums))
+    distinct_nums.sort()
+
+    nums_sum = dict.fromkeys(distinct_nums)
+
+    for n in nums_sum:
+        
+        nums_sum[n] = sorted(list(set([r[0] for r in data if int(r[1])==n])))
+
+    return [(k, v) for k, v in nums_sum.items()]
 
 
 def pregunta_09():
@@ -197,8 +390,43 @@ def pregunta_09():
     }
 
     """
-    return
+    
+    with open('data.csv') as f:
 
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    dict_values = [f[4].split(',') for f in data]
+
+    codes = []
+
+    nums = []
+    
+    for f in dict_values:
+
+        for i in f:
+
+            codes.append(i[:3])
+
+            nums.append((i[:3], i[4:]))
+
+    distinct_codes = list(set(codes))
+    distinct_codes.sort()
+
+    codes_nums = dict.fromkeys(codes, [])
+
+    occurrences = [(l, codes.count(l)) for l in distinct_codes]
+
+    return occurrences
 
 def pregunta_10():
     """
@@ -218,8 +446,23 @@ def pregunta_10():
 
 
     """
-    return
 
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+
+    return [(r[0], len(r[3].split(',')), len(r[4].split(','))) for r in data]
 
 def pregunta_11():
     """
@@ -239,8 +482,41 @@ def pregunta_11():
 
 
     """
-    return
 
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    list_values = [(f[1], f[3].split(',')) for f in data]
+
+    letters = []
+
+    for value in list_values:
+
+        letters += value[1]
+
+    distinct_letters = list(set(letters))
+    distinct_letters.sort()
+
+    dict_values = dict.fromkeys(distinct_letters, 0)
+
+    for v in list_values:
+
+        for l in v[1]:
+
+            dict_values[l] += int(v[0])
+    
+    return dict_values
 
 def pregunta_12():
     """
@@ -257,4 +533,31 @@ def pregunta_12():
     }
 
     """
-    return
+
+    with open('data.csv') as f:
+
+        text = f.read()
+
+    rows = text.split('\n')
+
+    data = []
+
+    for row in rows:
+
+        data.append(row.split('\t'))
+
+    data = data[:-1]
+
+    list_values = [(f[0], f[4].split(',')) for f in data]
+
+    letters = [f[0] for f in list_values]
+    distinct_letters = list(set(letters))
+    distinct_letters.sort()
+
+    dict_values = dict.fromkeys(distinct_letters, 0)
+
+    for r in list_values:
+
+        dict_values[r[0]] += sum(int(v[4:]) for v in r[1])
+
+    return dict_values
