@@ -422,9 +422,7 @@ def pregunta_09():
     distinct_codes = list(set(codes))
     distinct_codes.sort()
 
-    codes_nums = dict.fromkeys(codes, [])
-
-    occurrences = [(l, codes.count(l)) for l in distinct_codes]
+    occurrences = {l: codes.count(l) for l in distinct_codes}
 
     return occurrences
 
